@@ -1,9 +1,6 @@
-const cron = require("node-cron");
-const EmailVerify = require("../models/verifyEmail");
-
-// Cron job: Runs every 10 minutes
-cron.schedule("*/10 * * * *", async () => {
-  const expiryTime = new Date(Date.now() - 10 * 60 * 1000); // 10 minutes ago
+// Cron job: Runs daily at 3:00 AM hi chalega
+cron.schedule("0 3 * * *", async () => {
+  const expiryTime = new Date(Date.now() - 10 * 60 * 1000); // 10 minutes phel ke otp delete krega
 
   try {
     const result = await EmailVerify.deleteMany({

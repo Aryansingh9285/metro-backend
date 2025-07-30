@@ -17,6 +17,7 @@ app.use("/", verificationRouter)
 connectDB()
   .then(() => {
     console.log("Database Connnection Sucessfull.....");
+    console.log("Commit Successfully !")
     app.listen(4000, () => {
       console.log("Server is Running on port 4000....");
     });

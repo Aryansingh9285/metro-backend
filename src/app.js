@@ -16,12 +16,12 @@ app.use("/", verificationRouter)
 
 connectDB()
   .then(() => {
-    console.log("Database connnection Sucessfull.....");
+    console.log("Database Connnection Sucessfull.....");
     app.listen(4000, () => {
       console.log("Server is Running on port 4000....");
     });
   })
   .catch((err) => {
-    console.log("Database connection Failed.......");
+    console.log("Database Connection Failed.......");
   });
 

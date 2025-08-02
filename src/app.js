@@ -11,8 +11,9 @@ connectDB()
   .then(() => {
     console.log("Database Connnection Sucessfull.....");
     console.log("Commit Successfully !")
-    app.listen(4000, () => {
-      console.log("Server is Running on port 4000....");
+    const PORT = process.env.PORT || 4010;
+    app.listen(PORT, () => {
+      console.log("Server is Running on port: ", PORT);
     });
   })
   .catch((err) => {

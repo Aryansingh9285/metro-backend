@@ -1,27 +1,22 @@
 const express = require("express");
 const connectDB = require("./Config/database.js");
 const app = express();
-
 app.use(express.json());
 
-
-const AuthRouter = require("./router/auth.js");
-const verificationRouter = require("./router/sendVerificationCode.js")
-
-
-app.use("/", AuthRouter);
-app.use("/", verificationRouter)
-
-
+const authRoute = require("./routes/auth.js");
+// Running Routes URL
+app.use("/auth", authRoute);
 
 connectDB()
   .then(() => {
-    console.log("Database connnection Sucessfull.....");
-    app.listen(4000, () => {
-      console.log("Server is Running on port 4000....");
+    console.log("Database Connnection Sucessfull.....");
+    console.log("Commit Successfully !")
+    const PORT = process.env.PORT || 4010;
+    app.listen(PORT, () => {
+      console.log("Server is Running on port: ", PORT);
     });
   })
   .catch((err) => {
-    console.log("Database connection Failed.......");
+    console.log("Database Connection Failed.......");
   });
 

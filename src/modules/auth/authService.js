@@ -1,10 +1,28 @@
-const express = require("express")
-const EmailVerify = require("../models/verifyEmail")
-const axios = require("axios");
+const express = require('express');
+const { validatesignupdata } = require('../../utils/validation');
+const bcrypt = require("bcrypt")
+const User = require("../../models/user")
 
-const verificationRouter = express.Router()
+exports.signup = async(req,res) =>{
+    try{
+        validatesignupdata(req);
+        const {firstName , lastName,emailId, password}= req.body;
+        const passwordhash = await bcrypt.hash(password , 10);
 
-verificationRouter.post("/send-verification", async (req, res) => {
+        const user = new User({
+            firstName,
+            lastName,
+            emailId,
+            password:passwordhash
+        });
+    await user.save();
+    res.send("User Added Sucessfully");
+    }catch(err){
+        res.status(400).send(err.message);
+    }
+};
+
+exports.sendVerification = async(req, res) => {
   const { email, name } = req.body;
   if (!email || !name) {
     return res.status(400).send("Both email and name are required.");
@@ -28,7 +46,4 @@ verificationRouter.post("/send-verification", async (req, res) => {
     console.error("Email send error:", err.message);
     res.status(500).send("Error sending verification email: " + err.message);
   }
-});
-
-
-module.exports = verificationRouter;
+};

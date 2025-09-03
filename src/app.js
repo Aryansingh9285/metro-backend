@@ -8,6 +8,8 @@ const authRoute = require("./routes/auth.js");
 app.use("/auth", authRoute);
 
 connectDB()
+
+
   .then(() => {
     console.log("Database Connnection Sucessfull.....");
     console.log("Commit Successfully !")
